@@ -21,22 +21,22 @@ function startQuiz() {
 
   // start timer
 
-  // show starting time
-
-  var timer = document.getElementById("timer");
-  var time = 75;
-
-  // runs every second
-
-  setInterval(countDown, 1000);
-
-  // function to count down time
-
   function countDown() {
     time--;
     console.log(time);
     timer.innerHTML = time;
   }
+
+  // runs every second
+
+  setInterval(countDown, 1000);
+
+  // show starting time
+
+  var timer = document.getElementById("timer");
+  var time = 75;
+
+  displayQuestions();
 }
 
 // stop the quiz
@@ -92,18 +92,31 @@ var myQuestions = [
 
 // create function to get question data from array
 
-function displayQuestion() {
+function displayQuestions() {
   // get value of question 0
-  var getQuestion = myQuestions[0].questionSource;
+  var questionNumber = 0
+
+  var getQuestion = myQuestions[questionNumber].questionSource;
   console.log(getQuestion);
 
-  // get value of answers 0
+  // update quiz with current question
 
-  // write value of question 0
   var displayQuestion = document.getElementById("question");
   displayQuestion.innerHTML = getQuestion;
 
-  // write value of answers 0
+  // clear out any old question choices
+
+
+
+  // loop over choices
+  currentQuestion.choices.forEach(function(choice, i) {
+    // create new button for each choice
+
+    // attach click event listener to each choice
+
+    // display on the page
+  });
+
 }
 
 // create object to store scores and names
