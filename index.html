@@ -10,11 +10,15 @@
 </head>
 
 <body>
+  <!-- score board button -->
   <div class="scores">
     <a class="btn btn-primary" href="scoreboard.html">Score Board</a>
   </div>
+  <!-- timer display -->
   <div class="timer">Time: <span id="timer"></span></div>
+
   <div class="wrapper">
+    <!-- landing page -->
     <div id="landing" class="col-md-10 general">
       <h1>Welcome to the JavaScript Quiz!</h1>
       <p>
@@ -24,8 +28,17 @@
       <p>Incorrect answers will reduce your score/time by ten seconds!</p>
       <button class="btn btn-primary" id="start-button">Start Quiz</button>
     </div>
-    <div id="quiz" class="col-md-10 general">Quiz content here</div>
-    <div id="end-screen" class="col-md-10 general">
+    <!-- quiz questions -->
+    <div id="quiz" class="col-md-10 general">
+        <p>Questions will go here</p>
+        <h2 id="question"></h2>
+        <div id="choices" class="choices"></div>
+
+        
+    </div>
+
+    <!-- ending screen -->
+    <div id="end-screen" class="col-md-10 general hide">
       <h1>End screen here</h1>
       <p>Your score is<span id="final-score"></span>!</p>
     </div>
