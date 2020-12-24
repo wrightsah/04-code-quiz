@@ -1,4 +1,6 @@
-// click button to start timer
+// define elements
+
+var choicesElement = docuement.getElementById("choices");
 
 // define button
 var startButton = document.getElementById("start-button");
@@ -38,10 +40,6 @@ function startQuiz() {
 
   displayQuestions();
 }
-
-// stop the quiz
-
-function stopQuiz() {}
 
 // create an array of object for the questions and the answers
 
@@ -96,17 +94,17 @@ function displayQuestions() {
   // get value of question 0
   var questionNumber = 0
 
-  var getQuestion = myQuestions[questionNumber].questionSource;
-  console.log(getQuestion);
+  var currentQuestion = myQuestions[questionNumber];
+  console.log(currentQuestion);
 
   // update quiz with current question
 
   var displayQuestion = document.getElementById("question");
-  displayQuestion.innerHTML = getQuestion;
+  displayQuestion.textContent = currentQuestion.questionSource;
 
   // clear out any old question choices
 
-
+  choicesElement.innerHTML = "";
 
   // loop over choices
   currentQuestion.choices.forEach(function(choice, i) {
@@ -118,6 +116,10 @@ function displayQuestions() {
   });
 
 }
+
+// stop the quiz
+
+function stopQuiz() {}
 
 // create object to store scores and names
 
