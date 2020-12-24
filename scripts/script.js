@@ -1,6 +1,6 @@
 // define elements
 
-var choicesElement = docuement.getElementById("choices");
+var choicesElement = document.getElementById("choices");
 
 // define button
 var startButton = document.getElementById("start-button");
@@ -109,10 +109,17 @@ function displayQuestions() {
   // loop over choices
   currentQuestion.choices.forEach(function(choice, i) {
     // create new button for each choice
-
+      var choiceButton = document.createElement("button");
+      choiceButton.setAttribute("class", "choice");
+      choiceButton.setAttribute("value", choice);
+      choiceButton.textContent = i + 1 + ". " + choice;
     // attach click event listener to each choice
 
+    // choiceButton.onclick =  questionClick;
+
     // display on the page
+    choicesElement.appendChild(choiceButton);
+
   });
 
 }
