@@ -3,7 +3,7 @@
 var choicesElement = document.getElementById("choices");
 var feedbackElement = document.getElementById("feedback");
 var endScreenElement = document.getElementById("end-screen");
-var finalScore = document.getElementById("final-score");
+var finalScoreElement = document.getElementById("final-score");
 
 //global time variable
 
@@ -33,6 +33,10 @@ function startQuiz() {
     time--;
     console.log(time);
     timer.textContent = time;
+
+    if (time <= 0) {
+      stopQuiz();
+    }
   }
 
   // runs every second
@@ -193,12 +197,43 @@ function stopQuiz() {
   // show end screen
 
   endScreenElement.removeAttribute("class", "hide");
+
+  // final score
+
+  finalScoreElement.textContent = time;
+  console.log("Final score =" + time);
+
+  // hide quiz questions
+
+  quiz.setAttribute("class", "hide");
 }
 
-// create object to store scores and names
+// how to store scores on scoreboard page
 
-// var highScores = [
-//     {
+function storeScore() {
+  var initials = initialsElement.value;
+  initialsElement.value = "";
 
-//     }
-// ];
+  // if initials element is not blank, then get info from local storage
+
+  if (initials !== "") {
+    var highScores =
+      JSON.parse(window.localStorage.getItem("highscores")) || [];
+
+    var newScore = {
+      score: time,
+      initials: initials,
+    };
+
+    // save to local storage
+
+    highScores.push(newScore);
+    window.localStorage.setItem("highscores", JSON.stringify(highscores));
+
+    for (var i = 0; i < highScores.length; i++) {
+      var li = document.createElement("li");
+      li.textContent = highscores[i].initials + ": " + highscores[i].score;
+      document.getElementById("highscores").append(li);
+    }
+  }
+}
