@@ -30,7 +30,7 @@ function startQuiz() {
   function countDown() {
     time--;
     console.log(time);
-    timer.innerHTML = time;
+    timer.textContent = time;
   }
 
   // runs every second
@@ -146,8 +146,15 @@ function displayQuestions() {
         // make sure time is working
         console.log("Time left = " + time);
 
-        //if time is less than 0, then go to end page
-        
+        //if time is less than 0, then set it to 0
+        if (time < 0) {
+          time = 0;
+
+          // set timer to zero and stop it
+          timer.textContent = 0;
+          clearInterval(timer);
+        }
+
 
       };
 
@@ -159,7 +166,9 @@ function displayQuestions() {
 
 // stop the quiz
 
-function stopQuiz() {}
+function stopQuiz(){
+
+}
 
 // create object to store scores and names
 
