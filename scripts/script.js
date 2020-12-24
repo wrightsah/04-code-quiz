@@ -1,12 +1,15 @@
 // define elements
 
 var choicesElement = document.getElementById("choices");
+var feedbackElement = document.getElementById("feedback");
+
+//global time variable
+  
+var time = 75;
 
 // define button
 var startButton = document.getElementById("start-button");
 startButton.addEventListener("click", startQuiz);
-
-// define timer
 
 function startQuiz() {
   console.log("Start button pressed.");
@@ -20,7 +23,8 @@ function startQuiz() {
 
   var quizSection = document.getElementById("quiz");
   quizSection.classList.remove("hide");
-
+  
+  // define timer
   // start timer
 
   function countDown() {
@@ -36,7 +40,8 @@ function startQuiz() {
   // show starting time
 
   var timer = document.getElementById("timer");
-  var time = 75;
+  
+
 
   displayQuestions();
 }
@@ -90,9 +95,11 @@ var myQuestions = [
 
 // create function to get question data from array
 
-function displayQuestions() {
   // get value of question 0
   var questionNumber = 0
+
+function displayQuestions() {
+
 
   var currentQuestion = myQuestions[questionNumber];
   console.log(currentQuestion);
@@ -111,11 +118,13 @@ function displayQuestions() {
     // create new button for each choice
       var choiceButton = document.createElement("button");
       choiceButton.setAttribute("class", "choice");
+      choiceButton.setAttribute("class", "btn btn-primary");
       choiceButton.setAttribute("value", choice);
       choiceButton.textContent = i + 1 + ". " + choice;
     // attach click event listener to each choice
 
-    // choiceButton.onclick =  questionClick;
+    choiceButton.onclick =  questionClick;
+    
 
     // display on the page
     choicesElement.appendChild(choiceButton);
@@ -123,6 +132,30 @@ function displayQuestions() {
   });
 
 }
+
+// click to move on to the next question
+
+    // first create function 
+    
+    function questionClick(){
+      console.log("An answer was clicked");
+      console.log("this.value =" + this.value);
+      // check if answer is wrong
+      if (this.value !== myQuestions[questionNumber].answer) {
+        time -= 10;
+        // make sure time is working
+        console.log("Time left = " + time);
+
+        //if time is less than 0, then go to end page
+        
+
+      };
+
+    }
+
+    // check if correct or incorrect
+
+
 
 // stop the quiz
 
