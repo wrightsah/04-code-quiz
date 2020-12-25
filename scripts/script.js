@@ -202,12 +202,20 @@ function stopQuiz() {
 
   // final score
 
-  finalScoreElement.textContent = time;
-  console.log("Final score = " + time);
+  var finalScore = time
+  finalScoreElement.textContent = finalScore;
+  console.log("Final score = " + finalScore);
+
+  // store finalScore to local storage 
+
+  localStorage.setItem("score", finalScore);
+  console.log("The saved score was: " + finalScore);
 
   // hide quiz questions
 
   quiz.setAttribute("class", "hide");
+
+  
 }
 
 // store initials from text input
@@ -223,7 +231,7 @@ submitButton.addEventListener("click",logInitials);
 
 function logInitials() {
 
-// prevent default behavior?
+// prevent default behavior? 
 
 // variable for initials is = to the initials element value
 
@@ -231,11 +239,17 @@ var userInitials = document.getElementById("initials").value
 
 // console log to see if working
 
-console.log(userInitials);
+console.log("Your initials are: " + userInitials);
 
 // set userInitials to local storage item "initials"
 
 localStorage.setItem("initials" , userInitials);
+
+// define score
+
+// set finalScore to local storage item "score" - should this be here? 
+
+
   
 }
 
