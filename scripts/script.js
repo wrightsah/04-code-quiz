@@ -158,12 +158,14 @@ function questionClick() {
 
     feedbackElement.textContent = "Wrong!";
     feedbackElement.style.color = "red";
+    feedbackElement.style.textAlign = "center";
     feedbackElement.style.fontSize = "100px";
   } else {
     // display correct
 
     feedbackElement.textContent = "Correct!";
     feedbackElement.style.color = "green";
+    feedbackElement.style.textAlign = "center";
     feedbackElement.style.fontSize = "100px";
   }
 
