@@ -29,3 +29,11 @@ h1 {
 p {
   text-align: center;
 }
+
+.btn {
+  margin: 10px;
+}
+
+.choice-button {
+  margin: 10px;
+}

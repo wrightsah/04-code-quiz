@@ -120,7 +120,7 @@ function displayQuestions() {
     // create new button for each choice
     var choiceButton = document.createElement("button");
     choiceButton.setAttribute("class", "choice");
-    choiceButton.setAttribute("class", "btn btn-primary");
+    choiceButton.setAttribute("class", "btn btn-primary choice-button");
     choiceButton.setAttribute("value", choice);
     choiceButton.textContent = i + 1 + ". " + choice;
     // attach click event listener to each choice
