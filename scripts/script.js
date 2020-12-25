@@ -232,6 +232,10 @@ var userInitials = document.getElementById("initials").value
 // console log to see if working
 
 console.log(userInitials);
+
+// set userInitials to local storage item "initials"
+
+localStorage.setItem("initials" , userInitials);
   
 }
 
