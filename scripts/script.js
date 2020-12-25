@@ -203,39 +203,38 @@ function stopQuiz() {
   // final score
 
   finalScoreElement.textContent = time;
-  console.log("Final score =" + time);
+  console.log("Final score = " + time);
 
   // hide quiz questions
 
   quiz.setAttribute("class", "hide");
 }
 
-// how to store scores on scoreboard page
+// store initials from text input
 
-function storeScore() {
-  var initials = initialsElement.value;
-  initialsElement.value = "";
+// define button
+var submitButton = document.getElementById("submit");
 
-  // if initials element is not blank, then get info from local storage
+// add click event for submit button that starts function
 
-  if (initials !== "") {
-    var highScores =
-      JSON.parse(window.localStorage.getItem("highscores")) || [];
+submitButton.addEventListener("click",logInitials);
 
-    var newScore = {
-      score: time,
-      initials: initials,
-    };
+// define logInitials function
 
-    // save to local storage
+function logInitials() {
 
-    highScores.push(newScore);
-    window.localStorage.setItem("highscores", JSON.stringify(highscores));
+// prevent default behavior?
 
-    for (var i = 0; i < highScores.length; i++) {
-      var li = document.createElement("li");
-      li.textContent = highscores[i].initials + ": " + highscores[i].score;
-      document.getElementById("highscores").append(li);
-    }
-  }
+// variable for initials is = to the initials element value
+
+var userInitials = document.getElementById("initials").value
+
+// console log to see if working
+
+console.log(userInitials);
+  
 }
+
+
+    
+
