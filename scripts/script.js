@@ -213,9 +213,7 @@ function stopQuiz() {
 
   // hide quiz questions
 
-  quiz.setAttribute("class", "hide");
-
-  
+  quiz.setAttribute("class", "hide");  
 }
 
 // store initials from text input
@@ -249,7 +247,10 @@ localStorage.setItem("initials" , userInitials);
 
 // set finalScore to local storage item "score" - should this be here? 
 
-
+var newScore = {
+  score: time,
+  initials: initials
+};
   
 }
 
