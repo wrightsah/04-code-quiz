@@ -26,7 +26,6 @@ function startQuiz() {
   var quizSection = document.getElementById("quiz");
   quizSection.classList.remove("hide");
 
-  // define timer
   // start timer
 
   function countDown() {
@@ -35,6 +34,8 @@ function startQuiz() {
     timer.textContent = time;
 
     if (time <= 0) {
+
+      time = 0;
       stopQuiz();
     }
   }
@@ -149,9 +150,9 @@ function questionClick() {
     if (time < 0) {
       time = 0;
 
-      // set timer to zero and stop it
-      timer.textContent = 0;
-      clearInterval(timer);
+      // // set timer to zero and stop it - this may need to move somewhere else
+      // timer.textContent = 0;
+      // clearInterval(timer);
     }
 
     // display wrong
@@ -200,21 +201,25 @@ function stopQuiz() {
 
   endScreenElement.removeAttribute("class", "hide");
 
+  // hide quiz questions
+
+  quiz.setAttribute("class", "hide");
+
+};
+
   // final score
 
-  var finalScore = time
+  var finalScore = time;
   finalScoreElement.textContent = finalScore;
   console.log("Final score = " + finalScore);
 
-  // store finalScore to local storage 
+  // store finalScore to local storage
 
   localStorage.setItem("score", finalScore);
   console.log("The saved score was: " + finalScore);
 
-  // hide quiz questions
+  
 
-  quiz.setAttribute("class", "hide");  
-}
 
 // store initials from text input
 
@@ -223,37 +228,50 @@ var submitButton = document.getElementById("submit");
 
 // add click event for submit button that starts function
 
-submitButton.addEventListener("click",logInitials);
+submitButton.addEventListener("click", logInitials);
 
 // define logInitials function
 
 function logInitials() {
+  // prevent default behavior?
 
-// prevent default behavior? 
+  // variable for initials is = to the initials element value
 
-// variable for initials is = to the initials element value
+  var userInitials = document.getElementById("initials").value;
 
-var userInitials = document.getElementById("initials").value
+  // console log to see if working
 
-// console log to see if working
+  console.log("Your initials are: " + userInitials);
 
-console.log("Your initials are: " + userInitials);
+  // set userInitials to local storage item "initials"
 
-// set userInitials to local storage item "initials"
+  localStorage.setItem("initials", userInitials);
 
-localStorage.setItem("initials" , userInitials);
+  // define score
 
-// define score
+  // set finalScore to local storage item "score" - should this be here?
 
-// set finalScore to local storage item "score" - should this be here? 
+  // 1. define the object using var newScore
 
-var newScore = {
-  score: time,
-  initials: initials
-};
-  
+    var newHighScore = {
+      score: finalScore,
+      initials: userInitials
+    };
+
+  // convert to string - "var newObjectname = JSON.stringify(original name)"
+
+  var newHighScoreStored = JSON.stringify(newHighScore);
+
+  // 2. store to local storage: localStorage.setItem("name of object to be stored", "variable referenced")
+  // the variable referenced must be the stingified newobject
+
+  localStorage.setItem("newHighScore", "newHighScoreStored");
+
+  // 3. console log the object to verify that it works
+
+  console.log("The stored score is: " + newHighScoreStored);
+
+  // last step is redirect to scoreboard
+
+  // window.location.href = scoreboard.html;
 }
-
-
-    
-
