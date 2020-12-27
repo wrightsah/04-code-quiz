@@ -5,51 +5,10 @@ var feedbackElement = document.getElementById("feedback");
 var endScreenElement = document.getElementById("end-screen");
 var finalScoreElement = document.getElementById("final-score");
 
-//global time variable
-
-var time = 75;
-
 // define button
-var startButton = document.getElementById("start-button");
-startButton.addEventListener("click", startQuiz);
+var submitButton = document.getElementById("submit");
 
-function startQuiz() {
-  console.log("Start button pressed.");
-
-  // hide start screen
-
-  var landingSection = document.getElementById("landing");
-  landingSection.classList.add("hide");
-
-  // un-hide questions section
-
-  var quizSection = document.getElementById("quiz");
-  quizSection.classList.remove("hide");
-
-  // start timer
-
-  function countDown() {
-    time--;
-    console.log(time);
-    timer.textContent = time;
-
-    if (time <= 0) {
-
-      time = 0;
-      stopQuiz();
-    }
-  }
-
-  // runs every second
-
-  setInterval(countDown, 1000);
-
-  // show starting time
-
-  var timer = document.getElementById("timer");
-
-  displayQuestions();
-}
+// define questions
 
 // create an array of object for the questions and the answers
 
@@ -97,6 +56,52 @@ var myQuestions = [
     answer: "cars[0]",
   },
 ];
+
+//global time variable
+
+var time = 75;
+
+// define button
+var startButton = document.getElementById("start-button");
+startButton.addEventListener("click", startQuiz);
+
+function startQuiz() {
+  console.log("Start button pressed.");
+
+  // hide start screen
+
+  var landingSection = document.getElementById("landing");
+  landingSection.classList.add("hide");
+
+  // un-hide questions section
+
+  var quizSection = document.getElementById("quiz");
+  quizSection.classList.remove("hide");
+
+    // runs every second
+
+    setInterval(countDown, 1000);
+  
+  // start timer
+
+  // show starting time
+
+  var timer = document.getElementById("timer");
+
+  displayQuestions();
+}
+
+function countDown() {
+  time--;
+  console.log(time);
+  timer.textContent = time;
+
+  if (time <= 0) {
+    stopQuiz();
+  }
+}
+
+
 
 // create function to get question data from array
 
@@ -205,30 +210,23 @@ function stopQuiz() {
 
   quiz.setAttribute("class", "hide");
 
+    // final score
+
+    var finalScore = time;
+    finalScoreElement.textContent = finalScore;
+    console.log("Final score = " + finalScore);
+
+    // set timer to final score? 
+    timer.textContent = finalScore;
+  
+    // store finalScore to local storage
+  
+    localStorage.setItem("score", finalScore);
+    console.log("The saved score was: " + finalScore);
+
 };
 
-  // final score
-
-  var finalScore = time;
-  finalScoreElement.textContent = finalScore;
-  console.log("Final score = " + finalScore);
-
-  // store finalScore to local storage
-
-  localStorage.setItem("score", finalScore);
-  console.log("The saved score was: " + finalScore);
-
-  
-
-
 // store initials from text input
-
-// define button
-var submitButton = document.getElementById("submit");
-
-// add click event for submit button that starts function
-
-submitButton.addEventListener("click", logInitials);
 
 // define logInitials function
 
@@ -275,3 +273,7 @@ function logInitials() {
 
   // window.location.href = scoreboard.html;
 }
+
+// add click event for submit button that starts function
+
+submitButton.addEventListener("click", logInitials);
