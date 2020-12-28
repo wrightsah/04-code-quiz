@@ -5,7 +5,9 @@ var feedbackElement = document.getElementById("feedback");
 var endScreenElement = document.getElementById("end-screen");
 var finalScoreElement = document.getElementById("final-score");
 
-// define button
+// define start button
+var startButton = document.getElementById("start-button");
+// define submit button
 var submitButton = document.getElementById("submit");
 
 // define questions
@@ -61,9 +63,10 @@ var myQuestions = [
 
 var time = 75;
 
-// define button
-var startButton = document.getElementById("start-button");
-startButton.addEventListener("click", startQuiz);
+// get value of question 0
+var questionNumber = 0;
+
+// Define functions
 
 function startQuiz() {
   console.log("Start button pressed.");
@@ -78,10 +81,6 @@ function startQuiz() {
   var quizSection = document.getElementById("quiz");
   quizSection.classList.remove("hide");
 
-    // runs every second
-
-    setInterval(countDown, 1000);
-  
   // start timer
 
   // show starting time
@@ -92,21 +91,20 @@ function startQuiz() {
 }
 
 function countDown() {
-  time--;
-  console.log(time);
-  timer.textContent = time;
+  // runs every second
+  var timerInterval = setInterval(function () {
+    time--;
+    // console.log(time);
+    timer.textContent = time;
 
-  if (time <= 0) {
-    stopQuiz();
-  }
+    if (time <= 0) {
+      clearInterval(timerInterval);
+      stopQuiz();
+    }
+  }, 1000)
 }
 
-
-
 // create function to get question data from array
-
-// get value of question 0
-var questionNumber = 0;
 
 function displayQuestions() {
   var currentQuestion = myQuestions[questionNumber];
@@ -199,8 +197,10 @@ function questionClick() {
 
 function stopQuiz() {
   // stop timer
+  // or... just hide it instead :(
 
-  clearInterval(timer);
+  timer.classList.add("hide");
+
 
   // show end screen
 
@@ -210,25 +210,22 @@ function stopQuiz() {
 
   quiz.setAttribute("class", "hide");
 
-    // final score
+  // final score
 
-    var finalScore = time;
-    finalScoreElement.textContent = finalScore;
-    console.log("Final score = " + finalScore);
+  var finalScore = time;
+  finalScoreElement.textContent = finalScore;
+  console.log("Final score = " + finalScore);
 
-    // set timer to final score? 
-    timer.textContent = finalScore;
-  
-    // store finalScore to local storage
-  
-    localStorage.setItem("score", finalScore);
-    console.log("The saved score was: " + finalScore);
+  // set timer to final score?
+  timer.textContent = finalScore;
 
-};
+  // store finalScore to local storage
 
-// store initials from text input
+  localStorage.setItem("score", finalScore);
+  console.log("The saved score was: " + finalScore);
+}
 
-// define logInitials function
+// define logInitials function - store initials from text inputs
 
 function logInitials() {
   // prevent default behavior?
@@ -251,10 +248,10 @@ function logInitials() {
 
   // 1. define the object using var newScore
 
-    var newHighScore = {
-      score: finalScore,
-      initials: userInitials
-    };
+  var newHighScore = {
+    score: finalScore,
+    initials: userInitials,
+  };
 
   // convert to string - "var newObjectname = JSON.stringify(original name)"
 
@@ -274,6 +271,13 @@ function logInitials() {
   // window.location.href = scoreboard.html;
 }
 
-// add click event for submit button that starts function
+// add click event for start button - runs startQuiz function
+
+startButton.addEventListener("click", function () {
+  startQuiz();
+  countDown();
+});
+
+// add click event for submit button - runs logInitials function
 
 submitButton.addEventListener("click", logInitials);
