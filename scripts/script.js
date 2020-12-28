@@ -59,14 +59,17 @@ var myQuestions = [
   },
 ];
 
-//global time variable
-
+//Global Variables
+// Starting Time
 var time = 75;
-
-// get value of question 0
+// Final Score
+var finalScore = time;
+// Value of starting question
 var questionNumber = 0;
+// Empty high scores array
+var highScoresArray = [];
 
-// Define functions
+
 
 function startQuiz() {
   console.log("Start button pressed.");
@@ -99,9 +102,10 @@ function countDown() {
 
     if (time <= 0) {
       clearInterval(timerInterval);
+      time = 0;
       stopQuiz();
     }
-  }, 1000)
+  }, 1000);
 }
 
 // create function to get question data from array
@@ -201,7 +205,6 @@ function stopQuiz() {
 
   timer.classList.add("hide");
 
-
   // show end screen
 
   endScreenElement.removeAttribute("class", "hide");
@@ -227,8 +230,10 @@ function stopQuiz() {
 
 // define logInitials function - store initials from text inputs
 
-function logInitials() {
+function logInitials(event) {
   // prevent default behavior?
+
+  event.preventDefault();
 
   // variable for initials is = to the initials element value
 
@@ -240,7 +245,7 @@ function logInitials() {
 
   // set userInitials to local storage item "initials"
 
-  localStorage.setItem("initials", userInitials);
+  // localStorage.setItem("initials", userInitials);
 
   // define score
 
@@ -254,24 +259,26 @@ function logInitials() {
   };
 
   // convert to string - "var newObjectname = JSON.stringify(original name)"
+  highScoresArray.push(newHighScore);
 
-  var newHighScoreStored = JSON.stringify(newHighScore);
+  var highScoresArrayStored = JSON.stringify(highScoresArray);
 
   // 2. store to local storage: localStorage.setItem("name of object to be stored", "variable referenced")
   // the variable referenced must be the stingified newobject
 
-  localStorage.setItem("newHighScore", "newHighScoreStored");
+  localStorage.setItem("highscoresStored", highScoresArrayStored);
 
   // 3. console log the object to verify that it works
 
-  console.log("The stored score is: " + newHighScoreStored);
+  console.log("The stored score is: " + highScoresArrayStored);
 
   // last step is redirect to scoreboard
 
-  // window.location.href = scoreboard.html;
+  window.location.href = "scoreboard.html";
 }
 
 // add click event for start button - runs startQuiz function
+// also runs countDown - should be independent? 
 
 startButton.addEventListener("click", function () {
   startQuiz();
